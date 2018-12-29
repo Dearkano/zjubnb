@@ -1,0 +1,9 @@
+{
+  "short_name": "VolunteerX",
+  "name": "VolunteerX",
+  "description": "一款基于区块链的志愿者服务一体化公益众筹平台",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#66ccff",
+  "background_color": "#ffffff"
+}
