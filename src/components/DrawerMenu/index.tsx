@@ -8,12 +8,12 @@ import stateInstance from '@/containers/state'
 
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 
-import AspectRatio from '@material-ui/icons/AspectRatio'
-import Book from '@material-ui/icons/Book'
+import ListIcon from '@material-ui/icons/List'
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ExitToApp from '@material-ui/icons/ExitToApp'
-import FiberNew from '@material-ui/icons/FiberNew'
+import BuildIcon from '@material-ui/icons/Build'
 import HomeIcon from '@material-ui/icons/Home'
-import Search from '@material-ui/icons/Search'
+import PaymentIcon from '@material-ui/icons/Payment'
 import Settings from '@material-ui/icons/Settings'
 import Help from '@material-ui/icons/Help'
 import SpeakerNotes from '@material-ui/icons/SpeakerNotes'
@@ -69,19 +69,20 @@ const DrawerMenu: React.FunctionComponent = () => {
       <ListS onClick={CLOSE_DRAWER}>
         <UserInfo isLogIn={user.isLogIn} info={user.myInfo} />
         <DividerS />
-        <Item icon={<HomeIcon />} text="主页" onClick={jump('/')} />
-        <Item icon={<AspectRatio />} text="版面" onClick={jump('/boardList')} />
+        <Item icon={<HomeIcon />} text="Home" onClick={jump('/')} />
+        <Item icon={<AttachMoneyIcon />} text="Rent" onClick={jump('/rent')} />
+        <Item icon={<BuildIcon />} text="Repair" onClick={jump('/repair')} />
         {user.isLogIn && (
           <>
-            <Item icon={<Search />} text="搜索" onClick={jump('/search')} />
-            <Item icon={<SpeakerNotes />} text="私信" onClick={jump('/messageList')} />
+            <Item icon={<ListIcon />} text="Order" onClick={jump('/order')} />
+            <Item icon={<PaymentIcon />} text="Wallet" onClick={jump('/wallet')} />
           </>
         )}
-        <Item icon={<Settings />} text="设置" onClick={jump('/setting')} />
-        <Item icon={<Help />} text="帮助" onClick={jump('/help')} />
+        <Item icon={<Settings />} text="Setting" onClick={jump('/setting')} />
+        <Item icon={<Help />} text="Help" onClick={jump('/help')} />
         {user.isLogIn && (
           <>
-            <Item icon={<ExitToApp />} text="登出" onClick={LOG_OUT} />
+            <Item icon={<ExitToApp />} text="Logout" onClick={LOG_OUT} />
           </>
         )}
       </ListS>

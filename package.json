@@ -84,10 +84,5 @@
       "prettier-tslint fix",
       "git add"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsc --noEmit && lint-staged"
-    }
   }
 }
