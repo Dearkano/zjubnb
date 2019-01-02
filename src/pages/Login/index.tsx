@@ -14,7 +14,7 @@ import {
 
 import userInstance from '@/containers/user'
 
-import logo from '@/assets/logo.png'
+const logo = require('@/assets/logo.png')
 
 import LayoutCenter from '@/components/LayoutCenter'
 

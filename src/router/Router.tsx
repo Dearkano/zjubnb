@@ -3,7 +3,7 @@ import React from 'react'
 import { Router, RouteComponentProps, WindowLocation } from '@reach/router'
 
 import LogIn from '@/pages/Login'
-
+import Rent from '@/pages/Rent'
 
 export const Route: React.FunctionComponent<
   RouteComponentProps & {
@@ -25,6 +25,7 @@ export interface ILocation {
 const MyRouter: React.FunctionComponent<ILocation> = ({ location }) => (
   <Router location={location}>
     <Route path="logIn" component={LogIn} />
+    <Route path="rent" component={Rent} />
   </Router>
 )
 
