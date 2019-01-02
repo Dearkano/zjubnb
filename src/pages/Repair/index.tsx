@@ -24,14 +24,14 @@ const PlumbingIcon = require('@/assets/repair/plumbing.png')
 const Div = styled.div`
   padding-top: 20px;
   border-bottom: #eaeaea solid 2px;
-  background-color: #FFFFF0;
+  background-color: #F9F7F3;
 `
 
 const TypographyS = styled(Typography)`
   && {
     padding-left: 15px;
-    margin-top: 20px;
-    margin-bottom:20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 `
 
@@ -75,11 +75,18 @@ const Img = styled.img`
   width: 25px;
   height: 25px;
 `
+const ListItemTextS = styled(ListItemText)`
+  && {
+    span{
+        font-size: 0.8rem;
+    }
+  }
+`
 const IconItem = ({ title, src }: Props) => (
   <ListItem>
     <ListItemIcon>
       <Img src={src} />
     </ListItemIcon>
-    <ListItemText primary={title} />
+    <ListItemTextS primary={title} />
   </ListItem>
 )
