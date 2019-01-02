@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 import version from '@/version'
 
-const logo = require('@/assets/primaryLogo.png')
+const logo = require('@/assets/primaryLogo1.png')
 
 const IconButtonS = styled(IconButton).attrs({
   color: 'inherit',

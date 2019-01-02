@@ -1,5 +1,15 @@
 import React from 'react'
+import styled from 'styled-components'
+import Air from './air'
 
-export default ()=>{
-    
+const BackGround = styled.div`
+  background-color: #FFFFF0;
+`
+
+export default () => {
+  return (
+    <BackGround>
+      <Air />
+    </BackGround>
+  )
 }
