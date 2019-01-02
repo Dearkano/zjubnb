@@ -1,5 +1,5 @@
 import React from 'react'
-// https://reach.tech/router/api/Router
+import styled from 'styled-components'
 import { Router, RouteComponentProps, WindowLocation } from '@reach/router'
 
 import Home from '@/pages/Home'
@@ -26,7 +26,7 @@ export interface ILocation {
 
 const MyRouter: React.FunctionComponent<ILocation> = ({ location }) => (
   <Router location={location}>
-     <Route path="/" component={Home} />
+    <Route path="/" component={Home} />
     <Route path="logIn" component={LogIn} />
     <Route path="rent" component={Rent} />
     <Route path="repair" component={Repair} />

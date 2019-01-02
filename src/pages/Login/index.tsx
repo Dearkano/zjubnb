@@ -14,9 +14,11 @@ import {
 
 import userInstance from '@/containers/user'
 
-const logo = require('@/assets/logo.png')
+const logo = require('@/assets/primaryLogo1.png')
 
 import LayoutCenter from '@/components/LayoutCenter'
+
+import { login } from '@/services/login'
 
 const WrapperDiv = styled.div`
   display: flex;
@@ -92,9 +94,9 @@ const LogIn: React.FunctionComponent = () => {
       logInFail: false,
     })
 
-    const token = await userInstance.LOG_IN(username, password)
+    const response = await login(username, password)
 
-    token
+    response
       .fail(err => {
         setTimeout(() => {
           setLogInState({
