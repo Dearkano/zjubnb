@@ -30,10 +30,11 @@ const tutorialSteps = [
 ]
 
 const Img = styled.img`
-  display: 'block';
+  display: block;
   max-width: 400px;
-  overflow: 'hidden';
-  width: '100%';
+  overflow: hidden;
+  width: 100%;
+  border-radius: 15px;
 `
 
 const Div = styled.div`
