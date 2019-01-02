@@ -9,6 +9,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 import version from '@/version'
 
+const logo = require('@/assets/primaryLogo.png')
+
 const IconButtonS = styled(IconButton).attrs({
   color: 'inherit',
 })`
@@ -25,7 +27,9 @@ const MainText = styled(Typography).attrs({
     flex-grow: 1;
   }
 `
-
+const Img = styled.img`
+  width: 100px;
+`
 const Version = styled(Button).attrs({
   color: 'inherit',
   size: 'small',
@@ -42,7 +46,7 @@ const TopBar: React.FunctionComponent = () => (
         <MenuIcon />
       </IconButtonS>
 
-      <MainText>ZJUBNB</MainText>
+      <MainText><Img src={logo} /></MainText>
       <Version>{version}</Version>
     </Toolbar>
   </AppBar>

@@ -2,6 +2,7 @@ import React from 'react'
 // https://reach.tech/router/api/Router
 import { Router, RouteComponentProps, WindowLocation } from '@reach/router'
 
+import Home from '@/pages/Home'
 import LogIn from '@/pages/Login'
 import Rent from '@/pages/Rent'
 
@@ -24,6 +25,7 @@ export interface ILocation {
 
 const MyRouter: React.FunctionComponent<ILocation> = ({ location }) => (
   <Router location={location}>
+     <Route path="/" component={Home} />
     <Route path="logIn" component={LogIn} />
     <Route path="rent" component={Rent} />
   </Router>
