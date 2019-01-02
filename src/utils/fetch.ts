@@ -1,6 +1,8 @@
 /* tslint:disable */
-import { getLocalStorage, setLocalStorage } from './storage'
-import { Failure, Success, Try } from './fp/Try'
+import { Try, Success, Failure } from './fp/Try'
+import { getAccessToken } from './logIn'
+
+import host from '@/config/host'
 
 export interface FetchError {
   /**
@@ -19,7 +21,7 @@ export interface FetchError {
 }
 
 async function cc98Fetch<T>(url: string, init: RequestInit): Promise<Try<T, FetchError>> {
-  const baseUrl = 'http://111.231.120.224:3000/api'
+  const baseUrl = host.api
   const requestURL = `${baseUrl}/${url}`
 
   const response = await fetch(requestURL, init)
@@ -64,12 +66,17 @@ interface GETOptions {
    * URL 参数
    */
   params?: {
-    [key: string]: string
+    [key: string]: string | number
   }
 }
 
-export async function GET<T = any>(url: string, options: GETOptions = {}) {
+export async function GET<T>(url: string, options: GETOptions = {}) {
   const headers: Record<string, string> = {}
+
+  if (!options.noAuthorization) {
+    const accessToken = await getAccessToken()
+    if (accessToken) headers.Authorization = accessToken
+  }
 
   const requestInit: RequestInit = {
     headers: new Headers({
@@ -104,9 +111,13 @@ interface POSTOptions {
   params?: any
 }
 
-export async function POST<T = any>(url: string, options: POSTOptions = {}) {
+export async function POST<T = void>(url: string, options: POSTOptions = {}) {
   const headers: Record<string, string> = {}
 
+  if (!options.noAuthorization) {
+    const accessToken = await getAccessToken()
+    if (accessToken) headers.Authorization = accessToken
+  }
 
   const requestInit: RequestInit = {
     method: 'POST',
@@ -125,9 +136,13 @@ export async function POST<T = any>(url: string, options: POSTOptions = {}) {
 
 type PUTOptions = POSTOptions
 
-export async function PUT<T = any>(url: string, options: PUTOptions = {}) {
+export async function PUT<T = void>(url: string, options: PUTOptions = {}) {
   const headers: Record<string, string> = {}
 
+  if (!options.noAuthorization) {
+    const accessToken = await getAccessToken()
+    if (accessToken) headers.Authorization = accessToken
+  }
 
   const requestInit: RequestInit = {
     method: 'PUT',
@@ -146,15 +161,23 @@ export async function PUT<T = any>(url: string, options: PUTOptions = {}) {
 
 type DELETEOptions = GETOptions
 
-export async function DELETE<T = any>(url: string, options: DELETEOptions = {}) {
+export async function DELETE<T = void>(url: string, options: DELETEOptions = {}) {
   const headers: Record<string, string> = {}
+
+  if (!options.noAuthorization) {
+    const accessToken = await getAccessToken()
+    if (accessToken) headers.Authorization = accessToken
+  }
 
   const requestInit: RequestInit = {
     method: 'DELETE',
     headers: new Headers({
       ...headers,
-      ...options.headers,
+      ...(options.headers || {
+        'Content-Type': 'application/json',
+      }),
     }),
+    body: options.params && JSON.stringify(options.params),
     ...options.requestInit,
   }
 
@@ -164,8 +187,8 @@ export async function DELETE<T = any>(url: string, options: DELETEOptions = {}) 
 /**
  * just like $.param
  */
-function encodeParams(params: { [key: string]: string }) {
+export function encodeParams(params: { [key: string]: string | number }) {
   return Object.keys(params)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(`${params[key]}`))
     .join('&')
 }
