@@ -41,6 +41,7 @@ export default ({ data }: Props) => {
     stars: 3.5, // <-- the most important property: it sets the number of filled stars
     strokeWidth: 3,
   }
+
   return (
     <CardS>
       <CardActionArea>
