@@ -25,7 +25,7 @@ const PlumbingIcon = require('@/assets/repair/plumbing.png')
 const Div = styled.div`
   padding-top: 20px;
   border-bottom: #eaeaea solid 2px;
-  background-color: #FFFFF0;
+  background-color: #F9F7F3;
 `
 const MyAvatar = styled(Avatar)`
   && {
@@ -37,8 +37,8 @@ const MyAvatar = styled(Avatar)`
 const TypographyS = styled(Typography)`
   && {
     padding-left: 15px;
-    margin-top: 20px;
-    margin-bottom:20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 `
 

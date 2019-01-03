@@ -10,6 +10,7 @@ const LayoutCenter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f9f7f3;
 `
 
 export default LayoutCenter

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Avatar, Typography } from '@material-ui/core'
 
-const defaultAvatarImg = require('@/assets/snowball.png')
+const defaultAvatarImg = require('@/assets/avatar.png')
 
 const WrapperDiv = styled.div`
   display: flex;

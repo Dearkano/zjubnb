@@ -14,7 +14,10 @@ const room4 = require('@/assets/room4.png')
 const room5 = require('@/assets/room5.png')
 
 const ListS = styled(List)`
+  && {
     width: 100%;
+    background-color: #f9f7f3;
+  }
 `
 
 export default () => (

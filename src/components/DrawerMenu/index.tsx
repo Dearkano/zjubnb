@@ -48,6 +48,8 @@ const Item: React.FunctionComponent<ItemProps> = ({ icon, text, onClick }) => (
 const ListS = styled(List)`
   && {
     width: 190px;
+    background-color: #f9f7f3;
+    height: 100%;
   }
 `
 
@@ -58,6 +60,12 @@ const DividerS = styled(Divider)`
   }
 `
 
+const DrawerS = styled(Drawer)`
+  && {
+    background-color: #f9f7f3;
+  }
+`
+
 const jump = (link: string) => () => navigate(link)
 
 const DrawerMenu: React.FunctionComponent = () => {
@@ -65,7 +73,7 @@ const DrawerMenu: React.FunctionComponent = () => {
   const { state, CLOSE_DRAWER } = useContainer(stateInstance)
 
   return (
-    <Drawer open={state.isDrawerOpen} onClose={CLOSE_DRAWER}>
+    <DrawerS open={state.isDrawerOpen} onClose={CLOSE_DRAWER}>
       <ListS onClick={CLOSE_DRAWER}>
         <UserInfo isLogIn={user.isLogIn} info={user.myInfo} />
         <DividerS />
@@ -86,7 +94,7 @@ const DrawerMenu: React.FunctionComponent = () => {
           </>
         )}
       </ListS>
-    </Drawer>
+    </DrawerS>
   )
 }
 

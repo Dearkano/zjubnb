@@ -23,6 +23,7 @@ const CardMediaS = styled.img`
 const CardS = styled(Card)`
   && {
     width: 100%;
+    background-color: #F9F7F3;
   }
 `
 const CardActionsS = styled(CardActions)`

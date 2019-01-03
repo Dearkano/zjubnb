@@ -38,18 +38,26 @@ const Version = styled(Button).attrs({
     margin-right: -12px;
   }
 `
+const AppBarS = styled(AppBar)`
+  && {
+    box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 2px 3px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  }
+`
 
 const TopBar: React.FunctionComponent = () => (
-  <AppBar position="fixed">
+  <AppBarS position="fixed">
     <Toolbar>
       <IconButtonS onClick={stateInstance.OPEN_DRAWER}>
         <MenuIcon />
       </IconButtonS>
 
-      <MainText><Img src={logo} /></MainText>
+      <MainText>
+        <Img src={logo} />
+      </MainText>
       <Version>{version}</Version>
     </Toolbar>
-  </AppBar>
+  </AppBarS>
 )
 
 export default TopBar
