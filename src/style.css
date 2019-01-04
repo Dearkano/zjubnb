@@ -38,3 +38,9 @@ input:-webkit-autofill:focus {
 div {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+a {
+  text-decoration:none;
+  outline: none;
+  color: inherit;
+}

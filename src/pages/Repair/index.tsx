@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import styled from 'styled-components'
-
+import { ICompany } from '@zjubnb'
 import { List, ListItem, ListItemIcon, ListItemText, Typography, Avatar } from '@material-ui/core'
 import ServiceItem from './item';
 import { render } from 'react-dom';
@@ -104,6 +104,7 @@ export default () => {
           <ServiceItem
             key={e.id}
             data={e}
+            label="两分钟到达"
           />
         ))
       }
@@ -123,49 +124,27 @@ const Img = styled.img`
   width: 25px;
   height: 25px;
 `
-const data = [
+const data: ICompany[] = [
   {
     id: 1,
-    name: '123412341234',
+    name: '1234124',
     src: GarageIcon,
-    taxNumber: 1,
-    qualityImage: 1,
+    taxNumber: '1',
+    qualityImage: '1',
     intro: '213412sdafafsdsaddfsa',
-    address: 1,
-    phone: 17367078410,
-    rate: 3,
+    address: '1',
+    phone: '17367078410',
+    rate: 4,
   },
   {
-    id: 1,
-    name: '1',
-    src: 1,
-    taxNumber: 1,
-    qualityImage: 1,
-    intro: 1,
-    address: 1,
-    phone: 1,
-    rate: 3,
-  },
-  {
-    id: 1,
-    name: '1',
-    src: 1,
-    taxNumber: 1,
-    qualityImage: 1,
-    intro: 1,
-    address: 1,
-    phone: 1,
-    rate: 3,
-  },
-  {
-    id: 1,
-    name: '1',
-    src: 1,
-    taxNumber: 1,
-    qualityImage: 1,
-    intro: 1,
-    address: 1,
-    phone: 1,
+    id: 2,
+    name: '1234124',
+    src: GarageIcon,
+    taxNumber: '1',
+    qualityImage: '1',
+    intro: '213412sdafafsdsaddfsa',
+    address: '1',
+    phone: '17367078410',
     rate: 3,
   },
 ]

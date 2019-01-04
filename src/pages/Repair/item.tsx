@@ -1,20 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
+  Avatar,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   CardActionArea,
   CardMedia,
+  Chip,
   Typography,
 } from '@material-ui/core'
 import { ICompany } from '@zjubnb'
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
 import StarComponent from 'rc-rate'
 import 'rc-rate/assets/index.css'
+import { Link } from '@reach/router';
 
 interface Props {
   data: ICompany;
+  label?: string;
 }
 
 const CardMediaS = styled.img`
@@ -23,13 +29,18 @@ const CardMediaS = styled.img`
 `
 const CardS = styled(Card)`
   && {
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 5px;
   }
 `
 const CardActionsS = styled(CardActions)`
   && {
     padding-left: 15px;
     padding-right: 15px;
+    display:flex;
+    justify-content: space-between;
   }
 `
 const CardActionAreaS = styled(CardActionArea)`
@@ -40,10 +51,19 @@ const CardActionAreaS = styled(CardActionArea)`
     padding-right:15px;
   }
 `
-export default ({ data }: Props) => {
-  const { name, rate, intro, src, } = data;
+const TypographyS = styled(Typography)`
+  line-height: 28px;
+`
 
+const StarDiv = styled.div`
+  display: flex;
+`
+
+export default ({ data, label }: Props) => {
+  const { name, rate, intro, src } = data;
+  console.log(label);
   return (
+    <Link to={`/company/${data.id}`}>
     <CardS>
       <CardActionAreaS>
         <CardMediaS src={src} />
@@ -53,9 +73,21 @@ export default ({ data }: Props) => {
         </CardContent>
       </CardActionAreaS>
       <CardActionsS>
-        <StarComponent allowHalf disabled={true} defaultValue={rate} />
-        <Typography variant="inherit">{rate}</Typography>
+      {label &&
+        <Chip
+          label={label}
+          color="secondary"
+          deleteIcon={<DoneIcon />}
+          avatar={<Avatar><FaceIcon /></Avatar>}
+          variant="outlined"
+        />
+      }
+        <StarDiv>
+          <StarComponent allowHalf disabled={true} defaultValue={rate} />
+          <TypographyS variant="inherit">{rate}</TypographyS>
+        </StarDiv>
       </CardActionsS>
     </CardS>
+    </Link>
   )
 }
