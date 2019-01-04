@@ -9,16 +9,17 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core'
-import { IRent } from '@zjubnb'
+import { ICompany } from '@zjubnb'
 import StarComponent from 'rc-rate'
 import 'rc-rate/assets/index.css'
 
 interface Props {
-  data: IRent
+  data: ICompany;
 }
 
 const CardMediaS = styled.img`
-  width: 100%;
+  height: 150px;
+  width: 150px;
 `
 const CardS = styled(Card)`
   && {
@@ -28,36 +29,32 @@ const CardS = styled(Card)`
 const CardActionsS = styled(CardActions)`
   && {
     padding-left: 15px;
+    padding-right: 15px;
   }
 `
-
-export default ({ data }: Props) => {
-  const { title, src, description, rate, bed, type, price, rateAmount } = data
-  const starProps = {
-    emptyColor: '#aaa',
-    fillColor: '#ffa500',
-    fullStars: true,
-    size: '5em',
-    stars: 3.5, // <-- the most important property: it sets the number of filled stars
-    strokeWidth: 3,
+const CardActionAreaS = styled(CardActionArea)`
+  && {
+    display:flex;
+    height: 150px;
+    justify-content: flex-start;
+    padding-right:15px;
   }
+`
+export default ({ data }: Props) => {
+  const { name, rate, intro, src, } = data;
 
   return (
     <CardS>
-      <CardActionArea>
+      <CardActionAreaS>
         <CardMediaS src={src} />
         <CardContent>
-          <Typography variant="subtitle1">
-            {type} · {bed}BEDS
-          </Typography>
-          <Typography variant="h4">{title}</Typography>
-          <Typography component="h5">{description}</Typography>
-          <Typography variant="subtitle2">${price} per night · Free cancellation</Typography>
+          <Typography variant="h4">{name}</Typography>
+          <Typography component="h5">{intro}</Typography>
         </CardContent>
-      </CardActionArea>
+      </CardActionAreaS>
       <CardActionsS>
         <StarComponent allowHalf disabled={true} defaultValue={rate} />
-        <Typography variant="inherit">{rateAmount}</Typography>
+        <Typography variant="inherit">{rate}</Typography>
       </CardActionsS>
     </CardS>
   )

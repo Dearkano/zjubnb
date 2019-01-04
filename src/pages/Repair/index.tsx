@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import styled from 'styled-components'
 
 import { List, ListItem, ListItemIcon, ListItemText, Typography, Avatar } from '@material-ui/core'
+import ServiceItem from './item';
 import { render } from 'react-dom';
+import InfiniteList from '@/components/InfiniteList';
 
 const DoorIcon = require('@/assets/repair/door.png')
 const DeskIcon = require('@/assets/repair/desk.png')
@@ -48,6 +50,7 @@ export default () => {
   const switchCompany = (imgUrl: string) => {
     setTypeSelected(imgUrl)
   }
+
   const IconItem = ({ title, src }: Props) => (
     <ListItem onClick={() => { switchCompany(src) }}>
       <ListItemIcon>
@@ -89,12 +92,22 @@ export default () => {
     </>
   )
   const CompanySelect = () => (
-    <Div>
-      <MyAvatar alt="Remy Sharp" src={typeSelected} />
-      <Typography variant="h6" align="center">
-        for your project
-      </Typography>
-    </Div>
+    <>
+      <Div>
+        <MyAvatar alt="Remy Sharp" src={typeSelected} />
+        <Typography variant="h6" align="center">
+          for your project
+        </Typography>
+      </Div>
+      {
+        data.map(e => (
+          <ServiceItem
+            key={e.id}
+            data={e}
+          />
+        ))
+      }
+    </>
   )
 
   return typeSelected ?
@@ -110,3 +123,49 @@ const Img = styled.img`
   width: 25px;
   height: 25px;
 `
+const data = [
+  {
+    id: 1,
+    name: '123412341234',
+    src: GarageIcon,
+    taxNumber: 1,
+    qualityImage: 1,
+    intro: '213412sdafafsdsaddfsa',
+    address: 1,
+    phone: 17367078410,
+    rate: 3,
+  },
+  {
+    id: 1,
+    name: '1',
+    src: 1,
+    taxNumber: 1,
+    qualityImage: 1,
+    intro: 1,
+    address: 1,
+    phone: 1,
+    rate: 3,
+  },
+  {
+    id: 1,
+    name: '1',
+    src: 1,
+    taxNumber: 1,
+    qualityImage: 1,
+    intro: 1,
+    address: 1,
+    phone: 1,
+    rate: 3,
+  },
+  {
+    id: 1,
+    name: '1',
+    src: 1,
+    taxNumber: 1,
+    qualityImage: 1,
+    intro: 1,
+    address: 1,
+    phone: 1,
+    rate: 3,
+  },
+]
