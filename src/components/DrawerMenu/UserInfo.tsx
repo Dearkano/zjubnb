@@ -43,7 +43,7 @@ interface Props {
 const UserInfo: React.FunctionComponent<Props> = ({ isLogIn, info }) => (
   <WrapperDiv>
     <AvatarS
-      src={isLogIn ? info && info.portraitUrl : defaultAvatarImg}
+      src={isLogIn ? info && info.head_image : defaultAvatarImg}
       onClick={isLogIn ? () => navigate('/userCenter') : () => navigate('/logIn')}
     />
     <Username>{isLogIn ? info && info.client_name : '未登录'}</Username>

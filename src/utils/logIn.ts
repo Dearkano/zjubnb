@@ -137,5 +137,5 @@ export function logOut() {
  * 判断是否登录
  */
 export function isLogIn() {
-  return !!getLocalStorage('refresh_token')
+  return !!getLocalStorage('access_token')
 }
