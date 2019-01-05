@@ -4,8 +4,8 @@ interface IHost {
 }
 
 const host: IHost = {
-  oauth: process.env.oauth || 'https://119.23.226.114:8080',
-  api: process.env.api || 'https://119.23.226.114:8080',
+  oauth: process.env.oauth || 'http://119.23.226.114:8080/ssm/api',
+  api: process.env.api || 'http://119.23.226.114:8080/ssm/api',
 }
 
 export default host

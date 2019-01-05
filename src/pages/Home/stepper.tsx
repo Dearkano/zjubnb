@@ -44,31 +44,8 @@ const Div = styled.div`
 `
 
 export default () => {
-  const [activeStep, setActiveStep] = useState(0)
-  const [rtl, setRtl] = useState(false)
-
-  const handleNext = () => setActiveStep(activeStep + 1)
-
-  const handleBack = () => setActiveStep(activeStep - 1)
-
-  const handleStepChange = (nextActiveStep: number) => setActiveStep(nextActiveStep)
-
-  const maxSteps = tutorialSteps.length
-
-  return (
-    <Div>
-      <AutoPlaySwipeableViews
-        axis={rtl ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? <Img src={step.imgPath} alt={step.label} /> : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-    </Div>
-  )
+  const height = 90
+  const width = '100%'
+  const url = './weather/ads.html'
+  return <iframe height={height} width={width} frameBorder="0" src={url} />
 }

@@ -94,6 +94,10 @@ module.exports = {
         from: 'public/icons/',
         to: 'icons/'
       },
+      {
+        from: 'public/weather/',
+        to: 'weather/'
+      },
     ]),
 
     // workbox: https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin

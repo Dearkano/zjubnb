@@ -16,9 +16,6 @@ import HomeIcon from '@material-ui/icons/Home'
 import PaymentIcon from '@material-ui/icons/Payment'
 import Settings from '@material-ui/icons/Settings'
 import Help from '@material-ui/icons/Help'
-import SpeakerNotes from '@material-ui/icons/SpeakerNotes'
-import Whatshot from '@material-ui/icons/Whatshot'
-import Event from '@material-ui/icons/Event'
 
 import UserInfo from './UserInfo'
 
@@ -71,6 +68,7 @@ const jump = (link: string) => () => navigate(link)
 const DrawerMenu: React.FunctionComponent = () => {
   const { state: user, LOG_OUT } = useContainer(userInstance)
   const { state, CLOSE_DRAWER } = useContainer(stateInstance)
+  console.log(user)
 
   return (
     <DrawerS open={state.isDrawerOpen} onClose={CLOSE_DRAWER}>
@@ -99,3 +97,29 @@ const DrawerMenu: React.FunctionComponent = () => {
 }
 
 export default DrawerMenu
+
+/**
+ * 
+ * 1. 用户注册 -> 上传用户或者公司的基本信息
+ * 2. 用户登录 -> 公司登录和个人登录 返回全部个人信息
+ * 
+ * 1. 用户点开主页 -> 看到n个服务分类 -> 点击一个服务分类 -> 根据serviceid找到company[] -> 前端显示
+ * 2. 用户点击一个company -> 显示company信息，包括n个评论 -> 点击签约 -> 弹出表单
+ * 3. 用户填写表单 -> 内容包括 a. 选房子 从用户已经注册的房子里选择 b. 填写n个需求 [{service,detail},{service,detail}]
+ * 4. 提交表单 后端api接受并更新
+ * 
+ * 1. 公司登录 -> 显示个人信息
+ * 2. 公司点开订单列表，查询到所有的订单
+ * 3. 公司看到待处理的订单 -> 点击接受或者拒绝 
+ * 4. 公司点击接受 -> 服务开始 -> 更新进度（progress）-> 填写服务报告并上传 -> 服务结束
+ * 
+ * 1. 用户点击评价 -> 三个打分+一句话评论 -> 提交
+ * 
+ * 1. 用户更新信息
+ * 2. 用户添加房屋（区分房东和租客，房屋是属于他或者属于另一个用户）
+ * 3. 用户查看个人房屋
+ * 
+ * 1. 公司更新信息
+ * 2. 公司添加服务
+ * 
+ */

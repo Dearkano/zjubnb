@@ -75,7 +75,7 @@ export async function GET<T>(url: string, options: GETOptions = {}) {
 
   if (!options.noAuthorization) {
     const accessToken = await getAccessToken()
-    if (accessToken) headers.Authorization = accessToken
+    if (accessToken) headers.token = accessToken
   }
 
   const requestInit: RequestInit = {
@@ -116,21 +116,19 @@ export async function POST<T = void>(url: string, options: POSTOptions = {}) {
 
   if (!options.noAuthorization) {
     const accessToken = await getAccessToken()
-    if (accessToken) headers.Authorization = accessToken
+    if (accessToken) headers.token = accessToken
   }
-
+  const _headers = options.headers || {
+    'Content-Type': 'application/json',
+  }
+  const __headers = {...headers,..._headers}
   const requestInit: RequestInit = {
     method: 'POST',
-    headers: new Headers({
-      ...headers,
-      ...(options.headers || {
-        'Content-Type': 'application/json',
-      }),
-    }),
+    headers: __headers,
     body: options.params && JSON.stringify(options.params),
     ...options.requestInit,
   }
-
+  
   return await cc98Fetch<T>(url, requestInit)
 }
 
@@ -141,7 +139,7 @@ export async function PUT<T = void>(url: string, options: PUTOptions = {}) {
 
   if (!options.noAuthorization) {
     const accessToken = await getAccessToken()
-    if (accessToken) headers.Authorization = accessToken
+    if (accessToken) headers.token = accessToken
   }
 
   const requestInit: RequestInit = {
@@ -166,7 +164,7 @@ export async function DELETE<T = void>(url: string, options: DELETEOptions = {})
 
   if (!options.noAuthorization) {
     const accessToken = await getAccessToken()
-    if (accessToken) headers.Authorization = accessToken
+    if (accessToken) headers.token = accessToken
   }
 
   const requestInit: RequestInit = {
