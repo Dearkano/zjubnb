@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Weather from '@/utils/forecast/react-forecast.js'
 const Div = styled.div`
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-bottom: -5px;
 `
 export default () => {
   return (

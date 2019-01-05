@@ -5,7 +5,6 @@ import Message from './message'
 import Stepper from './stepper'
 
 const BackGround = styled.div`
-  padding-top: 15px;
   background-color: #F9F7F3;
 `
 

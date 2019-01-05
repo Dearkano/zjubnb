@@ -19,29 +19,29 @@ export interface Token {
  * 从本地取得 access_token，如果过期尝试刷新
  */
 export async function getAccessToken(): Promise<string> {
-  let accessToken = getLocalStorage('access_token')
+  let accessToken = getLocalStorage('access_token') || ''
 
-  if (!accessToken) {
-    const refreshToken = getLocalStorage('refresh_token') as string
+  // if (!accessToken) {
+  //   const refreshToken = getLocalStorage('refresh_token') as string
 
-    if (!refreshToken) {
-      return ''
-    }
+  //   if (!refreshToken) {
+  //     return ''
+  //   }
 
-    const token = await getTokenByRefreshToken(refreshToken)
-    token
-      .fail(() => {
-        // TODO: 添加 refresh token 过期的处理
-      })
-      .succeed(token => {
-        const access_token = `${token.token_type} ${token.access_token}`
-        setLocalStorage('access_token', access_token, token.expires_in)
-        // refresh_token 有效期一个月
-        setLocalStorage('refresh_token', token.refresh_token, 2592000)
+  //   const token = await getTokenByRefreshToken(refreshToken)
+  //   token
+  //     .fail(() => {
+  //       // TODO: 添加 refresh token 过期的处理
+  //     })
+  //     .succeed(token => {
+  //       const access_token = `${token.token_type} ${token.access_token}`
+  //       setLocalStorage('access_token', access_token, token.expires_in)
+  //       // refresh_token 有效期一个月
+  //       setLocalStorage('refresh_token', token.refresh_token, 2592000)
 
-        accessToken = access_token
-      })
-  }
+  //       accessToken = access_token
+  //     })
+  // }
 
   return accessToken as string
 }
@@ -137,5 +137,5 @@ export function logOut() {
  * 判断是否登录
  */
 export function isLogIn() {
-  return !!getLocalStorage('refresh_token')
+  return !!getLocalStorage('access_token')
 }

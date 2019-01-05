@@ -2,6 +2,8 @@ import { Container } from '@/hooks/useContainer'
 
 import { GET } from '@/utils/fetch'
 import { logIn, logOut, isLogIn } from '@/utils/logIn'
+import { login } from '@/services/login'
+import { getLocalStorage, setLocalStorage, removeLocalStorage } from '@/utils/storage'
 
 interface State {
   /**
@@ -26,19 +28,15 @@ class UserContainer extends Container<State> {
     this.FRESH_INFO()
   }
 
-  LOG_IN = async (username: string, password: string) => {
-    const token = await logIn(username, password)
-
-    token.fail().succeed(_ => {
-      this.setState(
-        {
-          isLogIn: true,
-        },
-        this.FRESH_INFO
-      )
-    })
-
-    return token
+  LOG_IN = (token: string) => {
+    setLocalStorage('access_token', token)
+    this.setState(
+      {
+        isLogIn: true,
+      },
+      this.FRESH_INFO
+    )
+    // this.FRESH_INFO
   }
 
   LOG_OUT = () => {
@@ -55,10 +53,10 @@ class UserContainer extends Container<State> {
       return
     }
 
-    const myInfo = await GET('me')
-    myInfo.fail().succeed(myInfo => {
+    const myInfo = await GET('get_information')
+    myInfo.fail().succeed((myInfo:any) => {
       this.setState({
-        myInfo,
+        myInfo: myInfo.data.client_information
       })
     })
   }

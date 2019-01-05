@@ -8,6 +8,7 @@ import DrawerMenu from '@/components/DrawerMenu'
 import BackGround from '@/components/BackGround'
 import Router from './router'
 import { myTheme } from './theme'
+import { install } from '@material-ui/styles'
 
 const App = () => (
   <BackGround>
@@ -18,6 +19,7 @@ const App = () => (
 )
 
 const Root = () => {
+  install()
   return (
     <MuiThemeProvider theme={myTheme}>
       <App />

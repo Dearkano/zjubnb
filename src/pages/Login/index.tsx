@@ -42,7 +42,7 @@ const FormDiv = styled.div`
 
 const LogInButton = styled(Button).attrs({
   variant: 'contained',
-  color: 'primary',
+  color: 'secondary',
 })`
   && {
     margin-top: 35px;
@@ -67,6 +67,12 @@ interface LogInState {
   loading: boolean
   logInFail: boolean
 }
+
+const A = styled.a`
+  color: blue;
+  font-size:0.7rem;
+  margin-top: 1rem;
+`
 
 const LogIn: React.FunctionComponent = () => {
   const [formField, setFormField] = useState<FormField>({
@@ -106,7 +112,9 @@ const LogIn: React.FunctionComponent = () => {
           // tslint:disable-next-line:align
         }, 2000)
       })
-      .succeed(_ => {
+      .succeed((data: any) => {
+        const token = data.data.token
+        userInstance.LOG_IN(token)
         setTimeout(() => navigate('/'), 1500)
       })
   }
@@ -140,6 +148,7 @@ const LogIn: React.FunctionComponent = () => {
           {logInFail ? 'Retry' : 'Login'}
           {loading && <ButtonProgress />}
         </LogInButton>
+        <A onClick={()=>navigate('/register')}>Register</A>
       </WrapperDiv>
     </LayoutCenter>
   )
