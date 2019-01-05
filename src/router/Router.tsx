@@ -11,6 +11,7 @@ import Register from '@/pages/Register'
 
 import CreateOrder from '@/pages/Repair/CreateOrder';
 import Wallet from '@/pages/Wallet';
+import SmartHome from '@/pages/SmartHome'
 export const Route: React.FunctionComponent<
   RouteComponentProps & {
     // @types/react 里 createElement 签名很混乱
@@ -38,6 +39,7 @@ const MyRouter: React.FunctionComponent<ILocation> = ({ location }) => (
     <Route path="company/:id" component={Company} />
     <Route path="create_order" component={CreateOrder} />
     <Route path="wallet" component={Wallet} />
+    <Route path="smartHome" component={SmartHome} />
   </Router>
 )
 

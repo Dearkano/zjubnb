@@ -1,5 +1,5 @@
 const path = require('path')
-const HTMLWebpackPlugin = require("html-webpack-plugin")
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -12,11 +12,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './../dist'),
     publicPath: '/',
-    filename: 'js/[name].[hash:8].js'
+    filename: 'js/[name].[hash:8].js',
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.[jt]sx?$/,
         // some @cc98 packages are ES6
         exclude: /node_modules\/(?![@cc98])/,
@@ -27,14 +28,11 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-        }
+        },
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ]
+        use: ['style-loader', 'css-loader'],
       },
       // {
       //   test: /\.less$/,
@@ -66,7 +64,7 @@ module.exports = {
           name: 'fonts/[name].[ext]',
         },
       },
-    ]
+    ],
   },
 
   resolve: {
@@ -75,7 +73,7 @@ module.exports = {
       '@': path.resolve('./src'),
     },
 
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 
   plugins: [
@@ -86,23 +84,32 @@ module.exports = {
       inject: true,
     }),
 
-    new CopyWebpackPlugin([{
+    new CopyWebpackPlugin([
+      {
         from: 'public/manifest.json',
-        to: 'manifest.json'
+        to: 'manifest.json',
       },
       {
         from: 'public/icons/',
-        to: 'icons/'
+        to: 'icons/',
       },
       {
         from: 'public/weather/',
-        to: 'weather/'
+        to: 'weather/',
       },
+      {
+        from: 'public/soda/',
+        to: 'soda/',
+      },
+      {
+        from: 'public/light/',
+        to: 'light/'
+      }
     ]),
 
     // workbox: https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
     new WorkboxPlugin.GenerateSW({
-      swDest: "service-worker.js",
+      swDest: 'service-worker.js',
       clientsClaim: true,
       skipWaiting: true,
     }),
