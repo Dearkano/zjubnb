@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import styled from 'styled-components'
-
-import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
+import { ICompany } from '@zjubnb'
+import { List, ListItem, ListItemIcon, ListItemText, Typography, Avatar } from '@material-ui/core'
+import ServiceItem from './item';
+import { render } from 'react-dom';
+import InfiniteList from '@/components/InfiniteList';
 
 const DoorIcon = require('@/assets/repair/door.png')
 const DeskIcon = require('@/assets/repair/desk.png')
@@ -26,7 +29,13 @@ const Div = styled.div`
   border-bottom: #eaeaea solid 2px;
   background-color: #F9F7F3;
 `
-
+const MyAvatar = styled(Avatar)`
+  && {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+`
 const TypographyS = styled(Typography)`
   && {
     padding-left: 15px;
@@ -35,37 +44,77 @@ const TypographyS = styled(Typography)`
   }
 `
 
-export default () => (
-  <>
-    <Div>
-      <Typography variant="h6" align="center">
-        Find a top-rated pro
-      </Typography>
-      <Typography variant="h6" align="center">
-        for your project
-      </Typography>
-      <TypographyS variant="subtitle2">POPULAR CATEGORIES</TypographyS>
-    </Div>
-    <List>
-      <IconItem title="Additions & Remodeling" src={HouseIcon} />
-      <IconItem title="Air Conditioning" src={AirConditionIcon} />
-      <IconItem title="Appliances" src={WashingMachineIcon} />
-      <IconItem title="Carpet & Upholstery Cleaning" src={CarpetIcon} />
-      <IconItem title="Contertops" src={DeskIcon} />
-      <IconItem title="Doors" src={DoorIcon} />
-      <IconItem title="Electrical" src={ElectronicIcon} />
-      <IconItem title="Fireplace & Wood Stoves" src={FirePlaceIcon} />
-      <IconItem title="Garage & Garage Doors" src={GarageIcon} />
-      <IconItem title="Landscaping" src={LandscapeIcon} />
-      <IconItem title="Windows" src={WindowIcon} />
-      <IconItem title="Roof" src={RoofIcon} />
-      <IconItem title="Plumbing" src={PlumbingIcon} />
-      <IconItem title="Fences" src={FencesIcon} />
-      <IconItem title="Handyman Service" src={HandymanIcon} />
-      <IconItem title="Tree Service" src={TreeServiceIcon} />
-    </List>
-  </>
-)
+export default () => {
+  const [typeSelected, setTypeSelected] = useState<string | undefined>(undefined);
+  // @ts-ignore
+  const switchCompany = (imgUrl: string) => {
+    setTypeSelected(imgUrl)
+  }
+
+  const IconItem = ({ title, src }: Props) => (
+    <ListItem onClick={() => { switchCompany(src) }}>
+      <ListItemIcon>
+        <Img src={src} />
+      </ListItemIcon>
+      <ListItemText primary={title} />
+    </ListItem>
+  )
+
+  const ListSelect = () => (
+    <>
+      <Div>
+        <Typography variant="h6" align="center">
+          Find a top-rated pro
+        </Typography>
+        <Typography variant="h6" align="center">
+          for your project
+        </Typography>
+        <TypographyS variant="subtitle2">POPULAR CATEGORIES</TypographyS>
+      </Div>
+      <List>
+        <IconItem title="Additions & Remodeling" src={HouseIcon} />
+        <IconItem title="Air Conditioning" src={AirConditionIcon} />
+        <IconItem title="Appliances" src={WashingMachineIcon} />
+        <IconItem title="Carpet & Upholstery Cleaning" src={CarpetIcon} />
+        <IconItem title="Contertops" src={DeskIcon} />
+        <IconItem title="Doors" src={DoorIcon} />
+        <IconItem title="Electrical" src={ElectronicIcon} />
+        <IconItem title="Fireplace & Wood Stoves" src={FirePlaceIcon} />
+        <IconItem title="Garage & Garage Doors" src={GarageIcon} />
+        <IconItem title="Landscaping" src={LandscapeIcon} />
+        <IconItem title="Windows" src={WindowIcon} />
+        <IconItem title="Roof" src={RoofIcon} />
+        <IconItem title="Plumbing" src={PlumbingIcon} />
+        <IconItem title="Fences" src={FencesIcon} />
+        <IconItem title="Handyman Service" src={HandymanIcon} />
+        <IconItem title="Tree Service" src={TreeServiceIcon} />
+      </List>
+    </>
+  )
+  const CompanySelect = () => (
+    <>
+      <Div>
+        <MyAvatar alt="Remy Sharp" src={typeSelected} />
+        <Typography variant="h6" align="center">
+          for your project
+        </Typography>
+      </Div>
+      {
+        data.map(e => (
+          <ServiceItem
+            key={e.id}
+            data={e}
+            label="两分钟到达"
+          />
+        ))
+      }
+    </>
+  )
+
+  return typeSelected ?
+    <CompanySelect />
+  : <ListSelect />;
+}
 
 interface Props {
   title: string
@@ -75,18 +124,27 @@ const Img = styled.img`
   width: 25px;
   height: 25px;
 `
-const ListItemTextS = styled(ListItemText)`
-  && {
-    span{
-        font-size: 0.8rem;
-    }
-  }
-`
-const IconItem = ({ title, src }: Props) => (
-  <ListItem>
-    <ListItemIcon>
-      <Img src={src} />
-    </ListItemIcon>
-    <ListItemTextS primary={title} />
-  </ListItem>
-)
+const data: ICompany[] = [
+  {
+    id: 1,
+    name: '1234124',
+    src: GarageIcon,
+    taxNumber: '1',
+    qualityImage: '1',
+    intro: '213412sdafafsdsaddfsa',
+    address: '1',
+    phone: '17367078410',
+    rate: 4,
+  },
+  {
+    id: 2,
+    name: '1234124',
+    src: GarageIcon,
+    taxNumber: '1',
+    qualityImage: '1',
+    intro: '213412sdafafsdsaddfsa',
+    address: '1',
+    phone: '17367078410',
+    rate: 3,
+  },
+]

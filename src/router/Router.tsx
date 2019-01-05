@@ -2,12 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { Router, RouteComponentProps, WindowLocation } from '@reach/router'
 
+import Company from '@/pages/Repair/CompanyDetail';
 import Home from '@/pages/Home'
 import LogIn from '@/pages/Login'
 import Rent from '@/pages/Rent'
 import Repair from '@/pages/Repair'
 import Register from '@/pages/Register'
 
+import CreateOrder from '@/pages/Repair/CreateOrder';
+import Wallet from '@/pages/Wallet';
 export const Route: React.FunctionComponent<
   RouteComponentProps & {
     // @types/react 里 createElement 签名很混乱
@@ -32,6 +35,9 @@ const MyRouter: React.FunctionComponent<ILocation> = ({ location }) => (
     <Route path="rent" component={Rent} />
     <Route path="repair" component={Repair} />
     <Route path="register" component={Register} />
+    <Route path="company/:id" component={Company} />
+    <Route path="create_order" component={CreateOrder} />
+    <Route path="wallet" component={Wallet} />
   </Router>
 )
 

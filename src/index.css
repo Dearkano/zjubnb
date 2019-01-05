@@ -28,3 +28,4 @@ html:not([data-scale]) .am-list-body::after {
   content: '';
   background-color: #fff;
 }
+
