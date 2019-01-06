@@ -1,0 +1,191 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,400);
+
+@appBg: #0a0a0a;
+@appSize: 300px;
+
+@btnInitialSize: 200px;
+@btnActiveSize: 250px;
+
+@btnInitialColor: #4681db;
+@btnActiveColor: rgba(199, 5, 239, 0.3);
+
+@btnTextSize: 11px;
+
+@partialInfoSize: 5px;
+
+* {
+  box-sizing: border-box;
+}
+body {background: @appBg;}
+main {
+  max-width: @appSize;
+  margin: 50px auto;
+  padding:25px;
+  text-align:center;
+  background: @appBg;
+  font-family:"Roboto";
+  overflow:hidden;
+}
+.btn-container {
+  cursor: pointer;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+  border-radius:50%;
+  padding-top: @partialInfoSize;
+  width: calc(@btnActiveSize + @partialInfoSize*2);
+  height: calc(@btnActiveSize + @partialInfoSize*2);
+}
+button {
+  display: block;
+  width: @btnInitialSize;
+  height: @btnInitialSize;
+  color: @btnInitialColor;
+  font-size: @btnTextSize;
+  background: @appBg;
+  box-shadow: inset 0 0 65px @btnInitialColor;
+  text-shadow:0 0 10px @btnInitialColor;
+  margin:auto;
+  position:relative;
+  top:50px;
+  border-radius: 50%;
+  border:none;
+  transition: all .5s ease-in-out;
+  outline:none;
+  font-family:"Roboto";
+  text-transform:uppercase;
+  letter-spacing: 1px;
+  z-index:10;
+}
+.btn-container:not(.active):hover button {
+  box-shadow: inset 0 0 75px #46b9db;
+  color:#46b9db;
+  font-size:calc(@btnTextSize + 1);
+}
+.active button {
+  width: @btnActiveSize;
+  height: @btnActiveSize;
+  box-shadow: inset 0 0 15px @btnActiveColor;
+  text-shadow:none;
+  color:rgba(0,0,0,0);
+  top:0px;
+  border:1px solid rgba(255,255,255,.08)
+}
+
+.nomad-text {
+  opacity:0;
+  z-index:0;
+  position:absolute;
+  color:white;
+  font-size:52px;
+  font-weight:100;
+  top:140px;
+  left:0;
+  width:100%;
+  text-align:center;
+  z-index:20;
+  transition: all 0s ease-in-out;
+}
+.active .nomad-text {
+  opacity:1;
+  transition: all .6s ease-in-out;
+  top:90px;
+}
+.nomad-label {
+  font-size:18px;
+  display:block;
+}
+.arc-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    z-index:1;
+}
+.arc {
+  width: 200px;
+  height: 200px;
+  margin-left: -30px;
+  margin-top: 20px;
+  position:absolute;
+  transition: all 0s ease-in-out;
+  opacity:0;
+}
+.active .arc {
+  opacity:1;
+  transition: all 2s ease-in-out;
+}
+.arc1 {
+  background: #ff3aff;
+  -webkit-transform: translate(80%,-40%);
+}
+.arc2 {
+  background: #7034f9;
+  -webkit-transform: translate(110%,60%);
+}
+.arc3 {
+  background: #33f9ff;
+  -webkit-transform: translate(60%,110%);
+}
+.arc4 {
+  background: #39f58a;
+  -webkit-transform: translate(-40%,95%);
+}
+
+.location-description {
+  text-align:left;
+  font-size:12px;
+  margin-top:10px;
+  margin-bottom:40px;
+  font-weight:100;
+  overflow:hidden;
+  position:relative;
+  opacity:0;
+  bottom:-100px;
+  transition: all .4s ease-in-out;
+}
+.location-description.active {
+  bottom:0;
+  opacity:1;
+}
+.arc-text {
+  width:40%;
+  float:left;
+  margin:25px 5% 0;
+}
+.arc-label {overflow:hidden;}
+.location {
+  float:left;
+  color:#666;
+}
+.amount {
+  float:right;
+  color:#ccc;
+  font-weight:400
+}
+.arc-bar {
+  overflow:hidden;
+  position:relative;
+  height:3px;
+  margin-top:5px;
+}
+.arc-bar__fill {
+  position:absolute;
+  height:3px;
+  top:0px;
+  left:0;
+}
+.arc-bar--arc1 {background:#250e25;}
+.arc-bar__fill--arc1 {background:#ff3aff}
+
+.arc-bar--arc2 {background:#211242;}
+.arc-bar__fill--arc2 {background:#7034f9}
+
+.arc-bar--arc3 {background:#072223;}
+.arc-bar__fill--arc3 {background:#33f9ff}
+
+.arc-bar--arc4 {background:#081f12;}
+.arc-bar__fill--arc4 {background:#39f58a}

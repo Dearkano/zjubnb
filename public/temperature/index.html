@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature display & Chartist 24h temperature chart</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Kanit:400,100,700'>
+<link rel='stylesheet' href='http://css-spinners.com/css/spinner/pulse.css'>
+<link rel='stylesheet' href='http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'>
+<link rel='stylesheet' href='https://raw.githubusercontent.com/Globegitter/chartist-plugin-tooltip/master/dist/chartist-plugin-tooltip.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<div class="content content-switch">
+  <!-- .col-sm-12// button.switch.depth &#10004;
+  -->
+  <div class="col-sm-12">
+    <ul class="gauge switch">
+      <li> 
+        <p> <i class="glyphicon glyphicon-picture"></i></p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="vertical-align loader">
+  <div class="col-sm-12 text-center">
+    <div class="pulse-loader">Loading...</div>
+  </div>
+</div>
+<div class="container">
+  <div class="row content content-temp vertical-align">
+    <div class="col-sm-12">
+      <ul class="gauge">
+        <li class="temp_in"> 
+          <p> <span class="temp">12</span><span>&deg;C</span><span class="pl">Inside</span></p>
+        </li>
+        <li class="temp_out">
+          <p>          <span class="temp">12</span><span>&deg;C</span><span class="pl">Outside</span></p>
+        </li>
+        <div class="row content content-chart">
+          <div class="col-sm-12"></div>
+          <div class="ct-chart vertical-align" id="myChart"></div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+<script src='http://color-mix.it/get/v2/colormix-2.0.0.min.js'></script>
+<script src='http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

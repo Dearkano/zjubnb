@@ -45,7 +45,7 @@ const Div = styled.div`
 
 export default () => {
   const height = 90
-  const width = '100%'
+  const width = '80%'
   const url = './weather/ads.html'
   return <iframe height={height} width={width} frameBorder="0" src={url} />
 }
