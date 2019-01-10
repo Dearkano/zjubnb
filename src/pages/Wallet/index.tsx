@@ -13,6 +13,10 @@ import {
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import PayMentIcon from '@material-ui/icons/Payment';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
+import SettingsIcon from '@material-ui/icons/Settings'
+
 import styled from 'styled-components';
 import { getMoney } from '@/utils/wallet'
 const LeftDiv = styled.div`
@@ -52,12 +56,12 @@ return (
   <CardS>
     <CardContentS>
       <LeftDiv>
-        <Typography component="h5">余额</Typography>
+        <Typography component="h5">balance</Typography>
         <Typography variant="h4">¥{money}</Typography>
       </LeftDiv>
       <RightDiv>
         <Button variant="outlined" size="medium" color="secondary">
-          充值
+          Recharge
         </Button>
       </RightDiv>
     </CardContentS>
@@ -82,7 +86,7 @@ return (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <DraftsIcon />
+        <PayMentIcon />
       </ListItemIcon>
       <ListItemText primary="Loan Center" />
     </ListItem>
@@ -97,7 +101,7 @@ return (
   >
     <ListItem button>
       <ListItemIcon>
-        <InboxIcon />
+        <AttachMoneyIcon />
       </ListItemIcon>
       <ListItemText primary="PayPal" />
     </ListItem>
@@ -112,7 +116,7 @@ return (
   >
     <ListItem button>
       <ListItemIcon>
-        <InboxIcon />
+        <SettingsIcon />
       </ListItemIcon>
       <ListItemText primary="Pay Without Password" />
     </ListItem>
