@@ -9,8 +9,15 @@ import {
   Select,
   MenuItem,
   FormHelperText,
-  Input
+  Input,
+  Drawer
 } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import userInstance from '@/containers/user'
 import useContainer from '@/hooks/useContainer'
 import NavigationIcon from '@material-ui/icons/Navigation';
@@ -25,6 +32,13 @@ import { postOrder } from '@/services/order';
 import types from '@/resources/services';
 import { Link, navigate } from '@reach/router';
 import { buy } from '@/utils/wallet';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 interface RepairItem {
   key: number;
   types: string;
@@ -114,10 +128,30 @@ export default () => {
     companyname: '212',
   }
   const [houseField, setHouseField] = useState(0);
+  const [open, setOpen] = React.useState(false);
   const [repairItemField, setRepairItemField] = useState<RepairItemList>([]);
+  const [drawerOpen, setDrawer] = useState(false);
   const { state: { data: company } } = useContainer(companyInstance)
   const { state: user } = useContainer(userInstance)
   const companyId = company.company_id;
+  const submit = async() => {
+    console.log(user.myInfo)
+    const data = {
+      clientId: user.myInfo.clent_id,
+      companyId: company.company_id,
+      houseId: houseField,
+      itemList: repairItemField.map(e => ({ serviceId: Number(e.types), detail: e.discript })),
+    }
+    console.log(data);
+    const res = await postOrder(data); 
+    res.fail()
+      .succeed(e => {
+        console.log(e);
+        buy(100);
+        navigate('order');
+      })
+
+  }
   const handleRepairItemField = {
     set: (key, obj) => {
       const a = repairItemField.map(e => {
@@ -134,13 +168,69 @@ export default () => {
       setRepairItemField(a);
     },
   }
+  const handleClose = (buy: boolean) => {
+    setDrawer(false);
+    if (buy) {
+      console.log('s');
+      setOpen(true);
+    }
+  }
+  const handleDialogClose = () => {
+    setOpen(false);
+  }
   const handleSelect = (e) => {
     setHouseField(e.target.value);
   }
   if (!user.myInfo) return <></>;
-
+  const fullList = (
+    <div>
+      <List>
+        {['PayPal', 'WorldPay', 'Credit Card'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['Other'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+  const PayDialog = () => (
+<Dialog
+  open={open}
+  onClose={handleDialogClose}
+  aria-labelledby="form-dialog-title"
+>
+  <DialogTitle id="form-dialog-title">Entry Password</DialogTitle>
+  <DialogContent>
+    <TextField
+      id="standard-password-input"
+      label="Password"
+      type="password"
+      autoComplete="current-password"
+      margin="normal"
+    />
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleDialogClose} color="secondary">
+      Cancel
+    </Button>
+    <Button onClick={submit} color="secondary">
+      Confirm
+    </Button>
+  </DialogActions>
+</Dialog>)
   return (
     <>
+      <PayDialog/>
       <GobackIcon onClick={() => { window.history.back() }}>
         <KeyboardBackspaceIcon />
       </GobackIcon>
@@ -203,30 +293,25 @@ export default () => {
         value={500}
         margin="normal"
         disabled
+        helperText="Automatic generation by AI"
       />
       </FormControl>
       </FormWrapper>
-
+      <Drawer anchor="bottom" open={drawerOpen} onClose={() => {handleClose()}}>
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={() => {handleClose(true)}}
+          onKeyDown={() => {handleClose(true)}}
+        >
+          {fullList}
+        </div>
+      </Drawer>
       <FixFab
         variant="extended"
         aria-label="snd"
         onClick={async() => {
-          console.log(user.myInfo)
-          const data = {
-            clientId: user.myInfo.clent_id,
-            companyId: company.company_id,
-            houseId: houseField,
-            itemList: repairItemField.map(e => ({ serviceId: Number(e.types), detail: e.discript })),
-          }
-          console.log(data);
-          const res = await postOrder(data); 
-          res.fail()
-            .succeed(e => {
-              console.log(e);
-              buy(100);
-              navigate('order');
-            })
-
+          setDrawer(true);
         }}
       >
         <NavigationIcon />

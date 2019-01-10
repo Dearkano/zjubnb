@@ -13,6 +13,7 @@ import CreateOrder from '@/pages/Repair/CreateOrder';
 import Wallet from '@/pages/Wallet';
 import SmartHome from '@/pages/SmartHome'
 import Order from '@/pages/Order'
+import Result from '@/pages/Result';
 export const Route: React.FunctionComponent<
   RouteComponentProps & {
     // @types/react 里 createElement 签名很混乱
@@ -42,6 +43,7 @@ const MyRouter: React.FunctionComponent<ILocation> = ({ location }) => (
     <Route path="wallet" component={Wallet} />
     <Route path="order" component={Order} />
     <Route path="smartHome" component={SmartHome} />
+    <Route path="result" component={Result} />
   </Router>
 )
 
