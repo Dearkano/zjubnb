@@ -25,8 +25,10 @@ interface Props {
 }
 
 const CardMediaS = styled.img`
-  height: 150px;
+&& {
   width: 150px;
+  max-height: 150px;
+}
 `
 const CardS = styled(Card)`
   && {

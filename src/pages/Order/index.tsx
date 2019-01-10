@@ -156,7 +156,7 @@ function DetailedExpansionPanel(props) {
           </Button>
         </DialogActions>
       </Dialog>
-      {orderList && orderList.data.orders.map(e => (
+      {orderList && orderList.data.orders && orderList.data.orders.map(e => (
         <CardE classes={classes} data={e} />
       ))}
     </div>
