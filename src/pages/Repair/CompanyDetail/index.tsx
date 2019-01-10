@@ -164,8 +164,8 @@ export default () => {
         indicatorColor="secondary"
         textColor="secondary"
       >
-        <Tab icon={<PhoneIcon />} label="服务详情" />
-        <Tab icon={<FavoriteIcon />} label="客户评价" />
+        <Tab icon={<PhoneIcon />} label="Detail" />
+        <Tab icon={<FavoriteIcon />} label="Comments" />
       </Tabs>
       {value === 0 &&
         <TabContainer>
@@ -179,7 +179,7 @@ export default () => {
       <Link to="/create_order">
         <FixFab variant="extended" aria-label="snd">
           <NavigationIcon />
-          立即预约
+          Order
         </FixFab>
       </Link>
     </>

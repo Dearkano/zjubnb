@@ -128,7 +128,7 @@ export default () => {
           <ServiceItem
             key={e.id}
             data={e}
-            label="两分钟到达"
+            label="in TWO minutes"
           />
         ))
       }
