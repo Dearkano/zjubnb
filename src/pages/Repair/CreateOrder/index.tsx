@@ -223,7 +223,13 @@ export default () => {
     <Button onClick={handleDialogClose} color="secondary">
       Cancel
     </Button>
-    <Button onClick={submit} color="secondary">
+    <Button
+      onClick={() => {
+        handleDialogClose();
+        submit();
+      }}
+      color="secondary"
+    >
       Confirm
     </Button>
   </DialogActions>
@@ -301,8 +307,8 @@ export default () => {
         <div
           tabIndex={0}
           role="button"
-          onClick={() => {handleClose(true)}}
-          onKeyDown={() => {handleClose(true)}}
+          onClick={() => { handleClose(true) }}
+          onKeyDown={() => { handleClose(true) }}
         >
           {fullList}
         </div>

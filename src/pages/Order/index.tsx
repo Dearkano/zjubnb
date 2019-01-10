@@ -23,9 +23,19 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { getOrders } from '@/services/order';
 import { navigate } from '@/utils/history';
+import { Drawer, TextField } from '@material-ui/core';
+import { styled } from '@material-ui/styles';
+
 const styles = theme => ({
   root: {
     width: '100%',
+  },
+  drawer: {
+    padding: '10px 20px 100px 20px',
+  },
+  button: {
+    width: '50px',
+    alignSelf: 'flex-end',
   },
   progress: {
     margin: theme.spacing.unit,
@@ -99,16 +109,18 @@ const CardE = ({classes, data, action}) => {
 </ExpansionPanelDetails>
 <Divider />
 <ExpansionPanelActions>
-  <Button size="small" onClick={()=>{
-    action('123132')
-  }}>Cancel</Button>
+  <Button size="small" >Cancel</Button>
   <Button 
     size="small"
     onClick={()=>{
       navigate('orderDetail');
     }}
   >Check</Button>
-  <Button size="small" color="secondary">
+  <Button
+    size="small"
+    color="secondary"
+    onClick={action}
+  >
     Comment
   </Button>
 </ExpansionPanelActions>
@@ -122,44 +134,59 @@ function DetailedExpansionPanel(props) {
   const [orderList, setOrderList] = useFetcher(() => getOrders(user.myInfo.clent_id));
   const [open, setOpen] = React.useState(false);
   const [dialogText, setDialogText] = React.useState('');
-
+  const [drawerState, setDrawerState] = React.useState(false);
   const handleClickOpen = (content) => () => {
     setDialogText(content)
     setOpen(true);
   };
-
+  const drawerClose = () => {
+    setDrawerState(false)
+  }
+  const drawerOpen = () => {
+    setDrawerState(true)
+  }
   function handleClose() {
     setOpen(false);
   }
   console.log(orderList);
   return (
+    <>
     <div className={classes.root}>
-      <Dialog
-        open={open}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
+      <Drawer
+        classes={{
+          paper: classes.drawer,
+        }}
+        anchor="bottom"
+        open={drawerState}
+        onClose={drawerClose}
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {dialogText}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            // TODO: 添加评论提交逻辑
+            drawerClose()
+          }}
+          classes={{
+            root: classes.button,
+          }}
+        >
+          submit
+        </Button>
+        <TextField
+          id="standard-required"
+          label="comment"
+          placeholder="Add comment"
+          className={classes.textField}
+          margin="normal"
+        />
+      </Drawer>
       {orderList && orderList.data.orders && orderList.data.orders.map(e => (
-        <CardE classes={classes} data={e} />
+        <CardE classes={classes} data={e} action={drawerOpen}/>
       ))}
     </div>
+
+    </>
   );
 }
 
