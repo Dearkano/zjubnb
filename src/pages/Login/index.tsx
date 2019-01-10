@@ -104,6 +104,7 @@ const LogIn: React.FunctionComponent = () => {
 
     response
       .fail(err => {
+        console.log(err)
         setTimeout(() => {
           setLogInState({
             loading: false,
@@ -114,6 +115,7 @@ const LogIn: React.FunctionComponent = () => {
       })
       .succeed((data: any) => {
         const token = data.data.token
+        console.log(token);
         userInstance.LOG_IN(token)
         setTimeout(() => navigate('/'), 1500)
       })

@@ -75,7 +75,7 @@ export async function GET<T>(url: string, options: GETOptions = {}) {
 
   if (!options.noAuthorization) {
     const accessToken = await getAccessToken()
-    if (accessToken) headers.token = accessToken
+    if (accessToken) headers.Authorization = accessToken
   }
 
   const requestInit: RequestInit = {

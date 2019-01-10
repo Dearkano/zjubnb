@@ -9,16 +9,23 @@ import {
   CardHeader,
   CardContent,
   Typography,
+  IconButton,
 } from '@material-ui/core';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
+import companyInstance from '@/containers/company';
+import useContainer from '@/hooks/useContainer';
+import useFetcher from '@/hooks/useFetcher';
 import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import EmailIcon from '@material-ui/icons/Email';
 import AssignIcon from '@material-ui/icons/Assignment';
 import styled from 'styled-components'
+import { IComment } from '@zjubnb';
 import StarComponent from 'rc-rate'
 import 'rc-rate/assets/index.css'
 import { Link } from '@reach/router';
+import { getComments } from '@/services/company';
 const MyAvatar = styled(Avatar)`
   && {
   margin: auto;
@@ -33,6 +40,12 @@ const TopImg = styled.div`
     width: 100%;
     background-color: black;
   }
+`
+const GobackIcon = styled(IconButton)`
+&& {
+  margin-left: 0px;
+  margin-right: 5px;
+}
 `
 const Intro = styled(Typography).attrs({
   variant: 'h5',
@@ -93,41 +106,54 @@ export default () => {
     intro: 'sasdajdsaknjka jqiwoejcqowe ajksd neq',
   }
   const [value, setValue] = React.useState(0);
-
-  function handleChange(event, newValue) {
+  const { state } = useContainer(companyInstance)
+  const { head_image, service_introduction, company_id} = state.data;
+  const [comments, setComments] = React.useState<IComment[]>([]);
+  console.log(comments);
+  async function handleChange(event, newValue) {
     setValue(newValue);
+    const res = await getComments(state.data.company_id);
+    res.fail()
+      .succeed(e => {
+        console.log(e);
+        setComments(e.data.Comments);
+      })
   }
-  const commentsRender = comments.map(e => (
+  const commentsRender = comments ? comments.map(e => (
     <Card>
       <CardHeader
         avatar={
           <Avatar aria-label="Recipe" src={e.src && e.src}>
-            {e.name.charAt(0)}
+            {e.clientName.charAt(0)}
           </Avatar>}
-        title={e.name}
-        subheader={e.time}
+        title={e.clientName}
+        subheader={e.date}
       />
       <CardContentS>
         <Typography component="p">
           {e.content}
         </Typography>
-        <StarComponent allowHalf disabled={true} defaultValue={e.rate} />
+        <StarComponent allowHalf disabled={true} defaultValue={e.attitude} />
       </CardContentS>
     </Card>
   ))
+  : '';
 
   return (
     <>
+      <GobackIcon onClick={() => { window.history.back() }}>
+        <KeyboardBackspaceIcon />
+      </GobackIcon>
       <MyPaper>
         <div style={{ position: 'relative', top: '-70px' }}>
-        <MyAvatar alt="Remy Sharp" src={data.src} />
+        <MyAvatar alt="Remy Sharp" src={head_image} />
         <IconDiv>
           <EmailIcon />
           <AssignIcon />
           <PhoneIcon />
         </IconDiv>
         <Intro>
-          {data.intro}
+          {service_introduction}
         </Intro>
         </div>
       </MyPaper>
@@ -159,31 +185,3 @@ export default () => {
     </>
   )
 }
-
-const comments = [
-  {
-    name: 'qc',
-    time: '2012-12-12',
-    content: '123123',
-    rate: 1,
-  },
-  {
-    src: HouseIcon,
-    name: 'qc',
-    time: '2012-12-12',
-    content: '12312asdfsdafasdf3',
-    rate: 1,
-  },
-  {
-    name: 'qc',
-    time: '2012-12-12',
-    content: '1231asdfasdfasd23',
-    rate: 1,
-  },
-  {
-    name: 'qc',
-    time: '2012-12-12',
-    content: '123asdfasdfsda123',
-    rate: 1,
-  },
-]

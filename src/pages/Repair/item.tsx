@@ -12,12 +12,13 @@ import {
   Typography,
 } from '@material-ui/core'
 import { ICompany } from '@zjubnb'
+import companyInstance from '@/containers/company';
+import useContainer from '@/hooks/useContainer';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import StarComponent from 'rc-rate'
 import 'rc-rate/assets/index.css'
-import { Link } from '@reach/router';
-
+import { Link, navigate } from '@reach/router';
 interface Props {
   data: ICompany;
   label?: string;
@@ -60,16 +61,21 @@ const StarDiv = styled.div`
 `
 
 export default ({ data, label }: Props) => {
-  const { name, rate, intro, src } = data;
-  console.log(label);
+  const { company_id, company_name, service_introduction, avg_quality, head_image } = data;
+  const { state } = useContainer(companyInstance)
+  console.log(data);
   return (
-    <Link to={`/company/${data.id}`}>
-    <CardS>
+    <CardS
+      onClick={() => {
+        companyInstance.SET(data);
+        navigate(`/company/${company_id}`);
+      }}
+    >
       <CardActionAreaS>
-        <CardMediaS src={src} />
+        <CardMediaS src={head_image} />
         <CardContent>
-          <Typography variant="h4">{name}</Typography>
-          <Typography component="h5">{intro}</Typography>
+          <Typography variant="h4">{company_name}</Typography>
+          <Typography component="h5">{service_introduction}</Typography>
         </CardContent>
       </CardActionAreaS>
       <CardActionsS>
@@ -83,11 +89,10 @@ export default ({ data, label }: Props) => {
         />
       }
         <StarDiv>
-          <StarComponent allowHalf disabled={true} defaultValue={rate} />
-          <TypographyS variant="inherit">{rate}</TypographyS>
+          <StarComponent allowHalf disabled={true} defaultValue={avg_quality} />
+          <TypographyS variant="inherit">{avg_quality}</TypographyS>
         </StarDiv>
       </CardActionsS>
     </CardS>
-    </Link>
   )
 }
