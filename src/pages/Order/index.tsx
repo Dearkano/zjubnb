@@ -24,7 +24,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { getOrders } from '@/services/order';
 import { navigate } from '@/utils/history';
 import { Drawer, TextField } from '@material-ui/core';
-import { styled } from '@material-ui/styles';
+import StarComponent from 'rc-rate'
 
 const styles = theme => ({
   root: {
@@ -43,6 +43,10 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
   },
+  star: {
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
@@ -60,6 +64,12 @@ const styles = theme => ({
   },
   column1: {
     flexBasis: '60%',
+  },
+  span: {
+    float: 'left',
+    width: '70px',
+    lineHeight: '47px',
+    marginRight: '50px',
   },
   column2: {
     flexBasis: '20%',
@@ -148,7 +158,7 @@ function DetailedExpansionPanel(props) {
   function handleClose() {
     setOpen(false);
   }
-  console.log(orderList);
+  console.log('orderList', orderList);
   return (
     <>
     <div className={classes.root}>
@@ -180,6 +190,18 @@ function DetailedExpansionPanel(props) {
           className={classes.textField}
           margin="normal"
         />
+        <div>
+        <span className={classes.span}>Attitud:  </span>
+        <StarComponent className={classes.star} defaultValue={4} />
+        </div>
+        <div>
+        <span className={classes.span}>Speed:   </span>
+        <StarComponent className={classes.star} defaultValue={4} />
+        </div>
+        <div>
+        <span className={classes.span}>Quality: </span>
+        <StarComponent className={classes.star} defaultValue={4} />
+        </div>
       </Drawer>
       {orderList && orderList.data.orders && orderList.data.orders.map(e => (
         <CardE classes={classes} data={e} action={drawerOpen}/>
