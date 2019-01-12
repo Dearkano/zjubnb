@@ -116,7 +116,7 @@ export async function POST<T = void>(url: string, options: POSTOptions = {}) {
 
   if (!options.noAuthorization) {
     const accessToken = await getAccessToken()
-    if (accessToken) headers.token = accessToken
+    if (accessToken) headers.Authorization = accessToken
   }
   const _headers = options.headers || {
     'Content-Type': 'application/json',
